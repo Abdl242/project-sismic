@@ -8,6 +8,8 @@ import logging
 import json
 import sys
 
+import os
+
 from google.cloud import pubsub_v1
 
 
@@ -16,38 +18,42 @@ PING_INTERVAL = 15
 
 
 def publish(message):
-    project_id = 'your-project-id'
-    topic_name = 'your-topic'
+    project_id = os.getenv('GOOGLE_PROJECT_ID')
+    topic_name = os.getenv("PUBSUB_PUB")
 
     publisher = pubsub_v1.PublisherClient()
     topic_path = publisher.topic_path(project_id, topic_name)
 
     # Message to be sent
-    message_data = message
+    #message_data = message
 
     # Convert the message to bytes
-    message_data = json.dumps(message_data)
-    message_data_bytes = message_data.encode('utf-8')
+    message_data = json.dumps(message).encode('utf-8')
+    #message_data_bytes = message_data.encode('utf-8')
 
     # Create a Pub/Sub message
-    message = pubsub_v1.types.PubsubMessage(data=message_data_bytes)
+    message = pubsub_v1.types.PubsubMessage(data=message_data)
 
     # Publish the message
-    response = publisher.publish(topic_path, messages=[message])
+    response = publisher.publish(topic_path, data=message_data)
 
 
 
 #You can modify this function to run custom process on the message
 def myprocessing(message):
     try:
-        data = json.loads(message)["data"]
-        msg = {"time":data["properties"]["time"],
-       "lat":data["properties"]["lat"],
-       "lon":data["properties"]["lon"],
-       "magnitude":data["properties"]["mag"],
-       "type":data["properties"]["action"]}
-        
-        publish(msg)
+        data = json.loads(message)
+        #print(data)
+        msg = {"id":data["unid"]["properties"]["time"],
+            "time":data["data"]["properties"]["time"],
+       "latitude":data["data"]["properties"]["lat"],
+       "longitude":data["data"]["properties"]["lon"],
+       "magnitude":data["data"]["properties"]["mag"],
+       "action":data["action"]}
+        if msg["action"] == "create":
+            publish(msg)
+     
+        print("Message published successfully")
     except Exception:
         logging.exception("Unable to parse json message")
 
