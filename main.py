@@ -44,14 +44,13 @@ def myprocessing(message):
     try:
         data = json.loads(message)
         #print(data)
-        msg = {"id":data["unid"]["properties"]["time"],
+        msg = {"id":data["data"]["properties"]["unid"],
             "time":data["data"]["properties"]["time"],
        "latitude":data["data"]["properties"]["lat"],
        "longitude":data["data"]["properties"]["lon"],
        "magnitude":data["data"]["properties"]["mag"],
        "action":data["action"]}
-        if msg["action"] == "create":
-            publish(msg)
+        publish(msg)
      
         print("Message published successfully")
     except Exception:
