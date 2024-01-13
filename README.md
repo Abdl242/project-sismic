@@ -8,6 +8,8 @@ This project aims to predict earthquake intensity and potential locations using 
 - Data Processing: Utilizing Google Cloud Dataflow, the streamed data is processed and then inserted into BigQuery for further analysis and storage.
 Technology Stack: Key technologies used in this pipeline include Google Cloud Pub/Sub, Google Cloud Dataflow, and BigQuery.
 
+![Workflow schema](workflow.png "Workflow schema")
+
 ## Machine Learning Models
 ### Earthquake Intensity Prediction Model
 - Dataset: Historical earthquake data spanning from 1963 to 2023.
@@ -23,11 +25,6 @@ Technology Stack: Key technologies used in this pipeline include Google Cloud Pu
 The report has been created using data studio.
 
 ![Report](report.png "An Example Image")
-
-
-## Data workflow
-
-![Workflow schema](workflow.png "Workflow schema")
 
 
 ## Usage
