@@ -25,6 +25,11 @@ The report has been created using data studio.
 ![Report](report.png "An Example Image")
 
 
+## Data workflow
+
+![Workflow schema](workflow.png "Workflow schema")
+
+
 ## Usage
 [Instructions on how to set up, configure, and use the pipeline and models.]
 
