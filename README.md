@@ -18,6 +18,13 @@ Technology Stack: Key technologies used in this pipeline include Google Cloud Pu
 - Objective: To predict potential locations of future earthquakes.
 - Approach: The model is being designed to analyze seismic activity patterns and other relevant geographical features to predict possible earthquake locations.
 
+## Reporting
+
+The report has been created using data studio.
+
+![Report](report.png "An Example Image")
+
+
 ## Usage
 [Instructions on how to set up, configure, and use the pipeline and models.]
 
